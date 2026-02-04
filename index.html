@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outlier+ | Marketing Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --outlier-yellow: #E2FF00;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #F8F8F8;
+        text-rendering: optimizeLegibility;
+      }
+
+      /* Global Performance Optimizations */
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .framer-animated {
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+
+      /* Reduce paint operations during scroll */
+      .hardware-accelerated {
+        transform: translateZ(0);
+        will-change: transform;
+      }
+
+      /* Smooth background blurs */
+      .backdrop-blur-fix {
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+      }
+
+      .bg-outlier-yellow { background-color: var(--outlier-yellow); }
+      .text-outlier-yellow { color: var(--outlier-yellow); }
+      .border-outlier-yellow { border-color: var(--outlier-yellow); }
+      
+      .gradient-bg {
+        background: radial-gradient(circle at top right, rgba(226, 255, 0, 0.05), transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(226, 255, 0, 0.03), transparent 30%);
+      }
+
+      /* Ensure content doesn't cause layout shifts */
+      main section {
+        contain: content;
+      }
+
+      /* Optimization for heavy blurs */
+      .blur-container {
+        isolation: isolate;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "recharts": "https://esm.sh/recharts@^3.7.0",
+    "framer-motion": "https://esm.sh/framer-motion@^11.11.11"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
