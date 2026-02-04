@@ -1,0 +1,36 @@
+name: Robot Builder
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Robot grabs your LEGO bricks (code)
+      - name: 1. Get latest code
+        uses: actions/checkout@v4
+
+      # Step 2: Robot installs the tools needed to build
+      - name: 2. Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Step 3: Robot builds the castle (turns code into a website)
+      - name: 3. Build the Website
+        run: |
+          npm install
+          npm run build
+
+      # Step 4: Robot puts the castle in Hostinger
+      - name: 4. Upload to Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./public_html/
