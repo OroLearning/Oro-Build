@@ -13,21 +13,21 @@ const FAQ: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#F8F8F8]">
+    <section className="py-16 lg:py-24 bg-[#F8F8F8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-16">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-5"
+            className="lg:col-span-5 text-center lg:text-left"
           >
             <div className="inline-flex items-center gap-2 bg-outlier-yellow/20 px-3 py-1 rounded-full mb-6 border border-outlier-yellow/30">
               <HelpCircle size={14} className="text-black" />
               <span className="text-[10px] font-bold uppercase tracking-wider">Frequently asked questions</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-6">Build a customer centric by marketing strategy</h2>
-            <p className="text-gray-500 mb-10 max-w-sm">We've answered the most common ones below. If you're still unsure or need help with something specific, our support team is ready 24/7.</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-tight">Build a customer centric by marketing strategy</h2>
+            <p className="text-gray-500 text-sm sm:text-base mb-8 lg:mb-10 max-w-sm mx-auto lg:mx-0">We've answered the most common ones below. If you're still unsure or need help with something specific, our support team is ready 24/7.</p>
             <motion.button 
               whileHover={{ scale: 1.05, backgroundColor: "#000000", color: "#E2FF00" }}
               transition={{ 
@@ -36,7 +36,7 @@ const FAQ: React.FC = () => {
                 scale: { type: "spring", stiffness: 400, damping: 25 }
               }}
               whileTap={{ scale: 0.95 }}
-              className="bg-outlier-yellow text-black px-8 py-3.5 rounded-full font-bold shadow-lg"
+              className="w-full sm:w-auto bg-outlier-yellow text-black px-8 py-3.5 rounded-full font-bold shadow-lg"
             >
               Start your free trial
             </motion.button>
@@ -50,25 +50,17 @@ const FAQ: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.01 }}
                 className="group bg-white rounded-2xl border border-gray-100 open:shadow-lg transition-all duration-300 overflow-hidden"
               >
-                <summary className="flex items-center justify-between p-6 cursor-pointer list-none focus:outline-none">
-                  <span className="font-bold tracking-tight text-lg group-hover:text-black transition-colors">{faq.q}</span>
-                  <motion.div 
-                    variants={{ open: { rotate: 90 }, closed: { rotate: 0 } }}
-                    className="text-gray-400 group-open:text-black transition-colors"
-                  >
+                <summary className="flex items-center justify-between p-5 sm:p-6 cursor-pointer list-none focus:outline-none">
+                  <span className="font-bold tracking-tight text-base sm:text-lg text-black">{faq.q}</span>
+                  <div className="text-gray-400 group-open:text-black shrink-0 ml-4">
                     <ChevronRight size={20} className="group-open:rotate-90 transition-transform" />
-                  </motion.div>
+                  </div>
                 </summary>
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  className="px-6 pb-6 text-gray-500 text-sm leading-relaxed"
-                >
+                <div className="px-5 sm:px-6 pb-6 text-gray-500 text-xs sm:text-sm leading-relaxed">
                   {faq.a}
-                </motion.div>
+                </div>
               </motion.details>
             ))}
           </div>
