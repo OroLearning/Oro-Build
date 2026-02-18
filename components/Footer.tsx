@@ -4,55 +4,47 @@ import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#F8F8F8] pt-16 lg:pt-24 pb-12 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center pb-16 border-b border-gray-200">
-          
-          {/* Centered Brand */}
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 bg-outlier-yellow rounded-full flex items-center justify-center shadow-sm">
-              <span className="font-bold text-black text-xs">O+</span>
+    <footer className="bg-transparent pt-12 pb-16 transition-all duration-300 px-4 sm:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto relative">
+        {/* Permanent, thicker border container */}
+        <div className="border-[3px] border-gray-200 rounded-[3rem] lg:rounded-[4rem] py-16 lg:py-24 px-6 transition-all duration-500 bg-white/30 backdrop-blur-sm shadow-sm">
+          <div className="flex flex-col items-center text-center">
+            
+            {/* Brand Logo & Name */}
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-10 h-10 bg-outlier-yellow rounded-full flex items-center justify-center shadow-sm">
+                <span className="font-black text-soft-black text-[11px]">O+</span>
+              </div>
+              <span className="font-bold text-xl tracking-tight text-soft-black uppercase tracking-wider">ORO+</span>
             </div>
-            <span className="font-bold text-lg tracking-tight">Outlier+</span>
-          </div>
-          
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-6 max-w-2xl text-black">
-            Uniformly powerful, effortlessly integrated.
-          </h2>
-          
-          <p className="text-gray-500 mb-10 max-w-sm leading-relaxed text-sm">
-            Join thousands of teams who trust Outlier+ for consistent growth across every platform.
-          </p>
-          
-          <div className="w-full max-w-md relative mb-12">
-            <input 
-              type="email" 
-              placeholder="Your email address..." 
-              className="w-full bg-white border border-gray-200 rounded-full px-8 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-outlier-yellow shadow-sm"
-            />
-            <button className="absolute right-2 top-2 bottom-2 bg-black text-white px-6 rounded-full text-xs font-bold">Subscribe</button>
+
+            {/* Headline - Single line */}
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-12 text-soft-black whitespace-normal lg:whitespace-nowrap leading-tight text-center max-w-none">
+              The future of your business is automated.
+            </h2>
+
+            {/* Newsletter Input - Responsive Fix */}
+            <div className="w-full max-w-lg relative">
+              <div className="relative flex items-center bg-white border-2 border-gray-200 rounded-full p-1.5 sm:p-2 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] focus-within:border-gray-400 transition-all">
+                <input 
+                  type="email" 
+                  placeholder="Your email address..." 
+                  className="flex-1 min-w-0 bg-transparent px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-none text-soft-black placeholder-gray-400 font-bold"
+                />
+                <button className="bg-soft-black text-white px-4 sm:px-10 py-2.5 sm:py-3.5 rounded-full text-[9px] sm:text-[11px] font-black uppercase tracking-widest hover:bg-zinc-800 transition-all active:scale-95 whitespace-nowrap shrink-0">
+                  Get Scale Tips
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Links Grid - Centered items */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 text-center">
-          {['Products', 'Resources', 'Company', 'Legal'].map((title) => (
-            <div key={title}>
-              <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6">{title}</h4>
-              <ul className="space-y-3">
-                {[1,2,3].map(i => (
-                  <li key={i}><a href="#" className="text-xs font-bold text-gray-600 hover:text-black transition-colors uppercase">Link {i}</a></li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 pt-10 border-t border-gray-100">
-          <p className="text-[9px] font-bold uppercase tracking-widest text-gray-400">©2025 - Outlier+ all rights reserved</p>
-          <div className="flex gap-6">
-            <a href="#" className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:text-black">Privacy</a>
-            <a href="#" className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:text-black">Terms</a>
+        {/* Minimal Footer Links */}
+        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-6 pt-10 border-t-2 border-gray-200/50">
+          <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400">©2025 - ORO+ Scale Mentorship</p>
+          <div className="flex gap-10">
+            <a href="#" className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400 hover:text-soft-black transition-colors">Scaling Results</a>
+            <a href="#" className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400 hover:text-soft-black transition-colors">Mentorship Agreement</a>
           </div>
         </div>
       </div>

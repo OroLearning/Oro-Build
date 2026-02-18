@@ -4,201 +4,175 @@ import { Check, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Pricing: React.FC = () => {
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annually'>('annually');
-  const [hoveredIndex, setHoveredIndex] = useState<number>(1); // Default to the middle "popular" one
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(1); // Default to middle card
 
   const plans = [
     {
-      name: "Outlier standard",
-      annualPrice: "39",
-      monthlyPrice: "59",
+      name: "AI Kickstart",
+      price: "1495",
+      popular: false,
       features: [
-        "Essential automation tools",
-        "Email campaigns + push",
-        "Pre-built templates & flows",
-        "Basic insights dashboard",
-        "Up to 2,000 subscribers",
-        "Community support",
-        "Landing page builder"
+        "Core AI Literacy",
+        "Advanced Prompt Engineering",
+        "Creative Image Generation",
+        "Workflow Drafting Basics",
+        "Basic Model Overview",
+        "Shared Growth Engineer",
+        "Limited Customer support"
       ]
     },
     {
-      name: "Outlier premium",
-      annualPrice: "99",
-      monthlyPrice: "139",
+      name: "Business Scale",
+      price: "3995",
       popular: true,
       features: [
-        "Up to 5 users",
-        "Social media marketing",
-        "Advanced analytics & reporting",
-        "Enhanced automation tools",
-        "A/B testing for campaigns",
-        "Email & chat support",
-        "Landing page builder"
+        "Everything in Ai Kickstart",
+        "Custom Web Deployment",
+        "Claude Code Integration",
+        "GitHub Hosting Setup",
+        "Live App Launch",
+        "Shared Growth Engineer",
+        "Limited Customer support"
       ]
     },
     {
-      name: "Outlier enterprise",
-      annualPrice: "199",
-      monthlyPrice: "249",
+      name: "Market Dominance",
+      price: "Custom",
+      popular: false,
       features: [
-        "All premium plan features",
-        "Custom analytics & reporting",
-        "Personalized onboarding",
-        "Dedicated account manager",
-        "24/7 premium support",
-        "Unlimited subscribers",
-        "SLA guarantees"
+        "Full Workflow Automation",
+        "Custom System Integration",
+        "Zero-Effort Implementation",
+        "Hosting Maintenance",
+        "Priority Executive Support",
+        "Dedicated Growth Engineer",
+        "24/7 Customer support"
       ]
     }
   ];
 
-  // Cast the custom cubic-bezier array as any to avoid Framer Motion transition type errors
-  const priceAnimation = {
-    initial: { opacity: 0, y: 10, filter: 'blur(4px)' },
-    animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
-    exit: { opacity: 0, y: -10, filter: 'blur(4px)' },
-    transition: { duration: 0.3, ease: [0.23, 1, 0.32, 1] as any }
-  };
-
   return (
-    <section className="py-20 bg-[#F8F8F8] relative overflow-hidden">
-      {/* Background accents */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-b from-transparent via-outlier-yellow/5 to-transparent pointer-events-none" />
-
+    <section className="py-24 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 bg-outlier-yellow/20 px-4 py-1.5 rounded-full mb-6 border border-outlier-yellow/30 shadow-sm"
-          >
-            <Zap size={14} className="text-black" fill="#000" />
-            <span className="text-[10px] font-bold uppercase tracking-wider">Pricing Plans</span>
-          </motion.div>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-6 max-w-3xl mx-auto leading-tight text-black">
-            Choose the plan that's right for your growth
-          </h2>
-          
-          <div className="flex items-center justify-center gap-4">
-            <span className={`text-sm font-bold transition-colors duration-300 ${billingCycle === 'monthly' ? 'text-black' : 'text-gray-400'}`}>Monthly</span>
-            <button 
-              onClick={() => setBillingCycle(prev => prev === 'monthly' ? 'annually' : 'monthly')}
-              className="w-12 h-6 bg-black rounded-full relative p-1 transition-colors hover:bg-gray-800 shadow-xl"
-            >
-              <motion.div 
-                animate={{ x: billingCycle === 'annually' ? 24 : 0 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                className="w-4 h-4 bg-outlier-yellow rounded-full shadow-[0_2px_5px_rgba(226,255,0,0.5)]"
-              />
-            </button>
-            <span className={`text-sm font-bold transition-colors duration-300 ${billingCycle === 'annually' ? 'text-black' : 'text-gray-400'}`}>Annually</span>
+        
+        {/* Header Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full mb-6 border border-gray-200 shadow-sm">
+            <Zap size={14} className="text-soft-black" fill="currentColor" />
+            <span className="text-[10px] font-bold uppercase tracking-wider text-soft-black">Scaling Tiers</span>
           </div>
-        </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-8 text-soft-black leading-tight">
+            Choose your growth speed
+          </h2>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-start">
+        {/* Pricing Cards Container */}
+        <div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch relative p-2 sm:p-4 perspective-1000"
+          onMouseLeave={() => setHoveredIndex(1)}
+        >
           {plans.map((plan, i) => {
-            const currentPrice = billingCycle === 'annually' ? plan.annualPrice : plan.monthlyPrice;
-            const priceSuffix = billingCycle === 'annually' ? '/annually' : '/per month';
+            const isHovered = hoveredIndex === i;
             
             return (
               <motion.div 
-                key={i} 
-                onMouseEnter={() => setHoveredIndex(i)}
+                key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group relative rounded-[2.5rem] transition-all duration-500 flex flex-col ${
-                  plan.popular ? 'bg-outlier-yellow' : 'bg-white'
-                } ${
-                  hoveredIndex === i ? 'shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] -translate-y-2' : 'shadow-[0_15px_40px_rgba(0,0,0,0.03)]'
-                }`}
+                transition={{ delay: i * 0.1 }}
+                className="relative cursor-pointer h-full"
+                onMouseEnter={() => setHoveredIndex(i)}
               >
-                {/* Moving selection border indicator */}
-                <AnimatePresence>
-                  {hoveredIndex === i && (
-                    <motion.div 
-                      layoutId="activeBorder"
-                      className="absolute inset-0 border-[2px] border-black rounded-[2.5rem] z-20 pointer-events-none"
-                      initial={false}
-                      transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                {/* The Sliding Selection Border - Enabled for all breakpoints */}
+                <AnimatePresence initial={false}>
+                  {isHovered && (
+                    <motion.div
+                      layoutId="pricing-selection-border"
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 35,
+                        mass: 0.8
+                      }}
+                      className="absolute -inset-1.5 sm:-inset-2 z-20 border-[3px] border-black rounded-[2.8rem] pointer-events-none shadow-xl"
                     />
                   )}
                 </AnimatePresence>
 
-                <div className="p-8 pb-10 flex flex-col relative z-10">
-                  <div className="flex justify-between items-start mb-6">
+                {/* Main Card */}
+                <motion.div 
+                  whileHover={{ 
+                    rotateY: i === 0 ? 2 : i === 2 ? -2 : 0, 
+                    y: -10,
+                  }}
+                  className={`relative z-10 h-full rounded-[2.5rem] flex flex-col p-6 sm:p-8 lg:p-10 transition-all duration-500 border-2 transform-gpu ${
+                    plan.popular 
+                      ? 'bg-[#E2FF00] border-[#E2FF00] shadow-lg' 
+                      : 'bg-white border-gray-100 shadow-sm'
+                  }`}
+                >
+                  {/* Header: Icon & Badge - Robust layout for narrow containers */}
+                  <div className="flex flex-wrap items-center justify-between mb-8 gap-3">
                     <motion.div 
-                      whileHover={{ rotate: 15 }}
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-sm ${plan.popular ? 'bg-white' : 'bg-gray-50 border border-gray-100 shadow-inner'}`}
+                      whileHover={{ scale: 1.1, rotate: 10 }}
+                      className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center border-2 shrink-0 ${plan.popular ? 'bg-white border-transparent' : 'bg-white border-gray-100'}`}
                     >
-                      <Zap size={24} className="text-black" fill={plan.popular ? "#000" : "none"} />
+                      <Zap size={20} className="text-soft-black" />
                     </motion.div>
+                    
                     {plan.popular && (
-                      <motion.span 
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ repeat: Infinity, duration: 3 }}
-                        className="bg-black text-white text-[9px] font-bold uppercase px-3 py-1.5 rounded-full shadow-lg"
-                      >
-                        Most popular
-                      </motion.span>
+                      <div className="flex">
+                        <span className="bg-black text-white text-[7px] sm:text-[8px] font-black uppercase px-3 sm:px-4 py-1.5 rounded-full tracking-widest whitespace-nowrap">
+                          Most Recommended
+                        </span>
+                      </div>
                     )}
                   </div>
-                  
-                  <h3 className={`text-xl font-bold mb-4 ${plan.popular ? 'text-black' : 'text-gray-900'}`}>{plan.name}</h3>
-                  
-                  <div className="flex items-baseline gap-1 mb-8 overflow-hidden h-[60px]">
-                    <AnimatePresence mode="wait">
-                      <motion.div 
-                        key={currentPrice}
-                        className="flex items-baseline gap-1"
-                        {...priceAnimation}
-                      >
-                        <span className={`text-5xl font-black ${plan.popular ? 'text-black' : 'text-gray-900'}`}>
-                          RM{currentPrice}
-                        </span>
-                        <span className={`text-xs font-bold ${plan.popular ? 'text-black/60' : 'text-gray-400'}`}>
-                          {priceSuffix}
-                        </span>
-                      </motion.div>
-                    </AnimatePresence>
+
+                  {/* Pricing Info */}
+                  <div className="text-left mb-8 sm:mb-10">
+                    <h3 className="text-xs sm:text-sm font-black text-soft-black mb-3 uppercase tracking-[0.15em] opacity-80">{plan.name}</h3>
+                    <div className="flex flex-wrap items-baseline gap-1">
+                      <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-soft-black tracking-tighter leading-none">
+                        {plan.price !== 'Custom' && 'RM'}{plan.price}
+                      </span>
+                    </div>
                   </div>
-                  
-                  <div className="space-y-3 mb-12">
-                    <p className={`text-[10px] font-bold uppercase tracking-widest mb-4 ${plan.popular ? 'text-black/50' : 'text-gray-400'}`}>Core Features</p>
+
+                  {/* Feature List */}
+                  <div className="flex-1 space-y-3.5 sm:space-y-4 mb-10 sm:mb-12 text-left">
+                    <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-5 sm:mb-6">What you get</p>
                     {plan.features.map((feature, idx) => (
                       <motion.div 
                         key={idx} 
-                        className="flex items-start gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.05 }}
+                        className="flex items-start gap-2.5 sm:gap-3"
                       >
-                        <div className={`mt-0.5 p-0.5 rounded-full ${plan.popular ? 'bg-black' : 'bg-outlier-yellow shadow-sm'}`}>
-                          <Check size={12} className={plan.popular ? 'text-white' : 'text-black'} strokeWidth={3} />
+                        <div className={`mt-0.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shrink-0 ${plan.popular ? 'bg-black' : 'bg-[#E2FF00]'}`}>
+                          <Check size={10} className={plan.popular ? 'text-white' : 'text-soft-black'} strokeWidth={4} />
                         </div>
-                        <span className={`text-[13px] font-bold leading-tight ${plan.popular ? 'text-black/80' : 'text-gray-800'}`}>{feature}</span>
+                        <span className="text-[11px] sm:text-[13px] font-bold text-soft-black/90 leading-snug">{feature}</span>
                       </motion.div>
                     ))}
                   </div>
-                  
+
+                  {/* CTA Button */}
                   <motion.button 
-                    whileHover={{ 
-                      scale: 1.05, 
-                      backgroundColor: plan.popular ? "#000000" : "#E2FF00", 
-                      color: plan.popular ? "#ffffff" : "#000000",
-                      boxShadow: plan.popular ? "0 25px 50px rgba(0, 0, 0, 0.4)" : "0 25px 50px rgba(226, 255, 0, 0.4)" 
-                    }}
-                    transition={{ 
-                      backgroundColor: { duration: 0 },
-                      color: { duration: 0 },
-                      scale: { type: "spring", stiffness: 400, damping: 25 }
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`w-full py-5 rounded-full font-black text-sm uppercase tracking-wider bg-black text-white`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-black text-white py-4 sm:py-5 rounded-full font-black text-[10px] sm:text-xs uppercase tracking-widest transition-all shadow-lg hover:bg-zinc-800"
                   >
-                    Start your free trial
+                    Join the Program
                   </motion.button>
-                </div>
+                </motion.div>
               </motion.div>
             );
           })}
